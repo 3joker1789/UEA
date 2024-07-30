@@ -19,8 +19,9 @@ def mostrar_menu():
     ruta_base = os.path.dirname(__file__)
 
     opciones = {
-        '1': 'TECNICAS-POO/UEA/PYTHON-PROYECT 1-1/UNIDAD 1/TECNICA ATRIBUTOS.py'
-        # Agrega aquí el resto de las rutas de los scripts
+        '1': 'R:/OneDrive - Universidad Estatal Amazónica/Escritorio/TECNICAS POO/UEA/PYTHON-PROYECT 1-1/UNIDAD 1/TECNICA ATRIBUTOS.py'
+
+
     }
 
     while True:
