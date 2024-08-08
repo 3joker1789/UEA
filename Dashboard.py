@@ -20,7 +20,6 @@ def mostrar_menu():
 
     opciones ={
         '1': 'R:/OneDrive - Universidad Estatal Amazónica/Escritorio/TECNICAS POO/UEA/PYTHON-PROYECT 1-1/UNIDAD 1/TECNICA ATRIBUTOS.py'
-        '2': 'R:/OneDrive - Universidad Estatal Amazónica/Escritorio/TECNICAS POO/UEA/PYTHON-PROYECT 1-1/UNIDAD 2/animales.py'
 
 
 
