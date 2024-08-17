@@ -1,6 +1,11 @@
+#NUESTRO CLIENTE  NOS PIDE QUE LE REALIZEMOS UN INVENTARIO DE SUS
+REPUESTOS DE REFRIGERACION YA QUE SU EMPRESA ESTA EN CRECIMIENTO Y DEBE DE MEJORAR SU REGISTRO
+
 print('SERVIFRIO')
 
 AÑO= int(input("AÑO: "))
+
+MES= int(input("MES: "))
 
 #CLASE PRODUCTO
 class Producto:
@@ -91,9 +96,9 @@ def main():
 
     while True:
         mostrar_menu()
-        opcion = input("Selecciona una opción: ")
+        item = input("Selecciona una item: ")
 
-        if opcion == '1':
+        if item == '1':
             id_producto = input("ID del producto: ")
             nombre = input("Nombre del producto: ")
             cantidad = int(input("Cantidad: "))
@@ -101,11 +106,11 @@ def main():
             producto = Producto(id_producto, nombre, cantidad, precio)
             inventario.agregar_producto(producto)
 
-        elif opcion == '2':
+        elif item == '2':
             id_producto = input("ID del producto a eliminar: ")
             inventario.eliminar_producto(id_producto)
 
-        elif opcion == '3':
+        elif item == '3':
             id_producto = input("ID del producto a actualizar: ")
             nueva_cantidad = input("Nueva cantidad (dejar en blanco para no cambiar): ")
             nuevo_precio = input("Nuevo precio (dejar en blanco para no cambiar): ")
@@ -113,14 +118,14 @@ def main():
             nuevo_precio = float(nuevo_precio) if nuevo_precio else None
             inventario.actualizar_producto(id_producto, nueva_cantidad, nuevo_precio)
 
-        elif opcion == '4':
+        elif item == '4':
             nombre = input("Nombre del producto a buscar: ")
             inventario.buscar_producto_por_nombre(nombre)
 
-        elif opcion == '5':
+        elif item == '5':
             inventario.mostrar_todos_los_productos()
 
-        elif opcion == '6':
+        elif item == '6':
             print("Saliendo del sistema de gestión de inventarios.")
             break
 
