@@ -172,10 +172,10 @@ class Inventario:
 inventario = Inventario(archivo='inventario.xlsx')
 
 # Añadir un producto
-inventario.añadir_producto('1', 'Compresor LG QK-134', 15, 150.00)
+inventario.añadir_producto('11', 'sondas full gauge ', 21, 7.00)
 
 # Actualizar un producto
-inventario.actualizar_producto('001', 8, 949.99)
+inventario.actualizar_producto('11', 22, 7.00)
 
 # Eliminar un producto
 inventario.eliminar_producto('001')
