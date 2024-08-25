@@ -23,7 +23,7 @@
     #Realiza pruebas exhaustivas para asegurarte de que el programa puede manejar situaciones como archivos corruptos, falta de permisos de escritura, y más.
 
 class Inventario:
-    def __init__(self, archivo='inventario.txt'):
+    def __init__(self, archivo='INVENTARIO.txt'):
         self.archivo = archivo
         self.productos = {}
         self.cargar_inventario()
