@@ -23,7 +23,7 @@
     #Realiza pruebas exhaustivas para asegurarte de que el programa puede manejar situaciones como archivos corruptos, falta de permisos de escritura, y más.
 
 import os
-
+from openpyxl import Workbook, load_workbook
 class Inventario:
     def __init__(self, archivo='inventario.txt'):
         self.archivo = archivo
