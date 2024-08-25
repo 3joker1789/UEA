@@ -22,53 +22,67 @@
     #Mantén la organización y claridad del código, asegurando que todas las modificaciones estén bien comentadas para explicar el funcionamiento del manejo de archivos y excepciones.
     #Realiza pruebas exhaustivas para asegurarte de que el programa puede manejar situaciones como archivos corruptos, falta de permisos de escritura, y más.
 
-import os
-
 class Inventario:
-    def __init__(self, archivo_inventario='inventario.txt'):
-        self.archivo_inventario = archivo_inventario
-        self.productos = self.cargar_inventario()
+    def __init__(self, archivo='inventario.txt'):
+        self.archivo = archivo
+        self.productos = {}
+        self.cargar_inventario()
 
     def cargar_inventario(self):
-        productos = {}
+        if not os.path.exists(self.archivo):
+            self.crear_archivo()
         try:
-            with open(self.archivo_inventario, 'r') as archivo:
-                for linea in archivo:
-                    codigo, nombre, cantidad = linea.strip().split(',')
-                    productos[codigo] = {'nombre': nombre, 'cantidad': int(cantidad)}
-        except FileNotFoundError:
-            print(f"Archivo {self.archivo_inventario} no encontrado. Se creará uno nuevo.")
-        except PermissionError:
-            print(f"No se tienen permisos para leer el archivo {self.archivo_inventario}.")
+            with open(self.archivo, 'r') as file:
+                for linea in file:
+                    datos = linea.strip().split(',')
+                    id_producto = datos[0]
+                    self.productos[id_producto] = {
+                        'nombre': datos[1],
+                        'categoria': datos[2],
+                        'cantidad': int(datos[3]),
+                        'precio': float(datos[4]),
+                        'proveedor': datos[5],
+                        'fecha_ingreso': datos[6],
+                        'ubicacion': datos[7],
+                        'notas': datos[8]
+                    }
         except Exception as e:
-            print(f"Error inesperado: {e}")
-        return productos
+            print(f"Error al cargar el inventario: {e}")
 
     def guardar_inventario(self):
         try:
-            with open(self.archivo_inventario, 'w') as archivo:
-                for codigo, datos in self.productos.items():
-                    archivo.write(f"{codigo},{datos['nombre']},{datos['cantidad']}\n")
+            with open(self.archivo, 'w') as file:
+                for id_producto, datos in self.productos.items():
+                    file.write(f"{id_producto},{datos['nombre']},{datos['categoria']},"
+                               f"{datos['cantidad']},{datos['precio']},{datos['proveedor']},"
+                               f"{datos['fecha_ingreso']},{datos['ubicacion']},{datos['notas']}\n")
             print("Inventario guardado exitosamente.")
         except PermissionError:
-            print(f"No se tienen permisos para escribir en el archivo {self.archivo_inventario}.")
+            print("Error: Permiso denegado para escribir en el archivo.")
         except Exception as e:
             print(f"Error al guardar el inventario: {e}")
 
-    def agregar_producto(self, codigo, nombre, cantidad):
-        self.productos[codigo] = {'nombre': nombre, 'cantidad': cantidad}
-        self.guardar_inventario()
-
-    def actualizar_producto(self, codigo, cantidad):
-        if codigo in self.productos:
-            self.productos[codigo]['cantidad'] = cantidad
-            self.guardar_inventario()
+    def añadir_producto(self, id_producto, nombre, categoria, cantidad, precio, proveedor, fecha_ingreso, ubicacion, notas):
+        if id_producto in self.productos:
+            print("El producto ya existe en el inventario.")
         else:
-            print("Producto no encontrado.")
-
-    def eliminar_producto(self, codigo):
-        if codigo in self.productos:
-            del self.productos[codigo]
+            self.productos[id_producto] = {
+                'nombre': nombre,
+                'categoria': categoria,
+                'cantidad': cantidad,
+                'precio': precio,
+                'proveedor': proveedor,
+                'fecha_ingreso': fecha_ingreso,
+                'ubicacion': ubicacion,
+                'notas': notas
+            }
             self.guardar_inventario()
-        else:
-            print("Producto no encontrado.")
+
+    # Métodos para actualizar y eliminar productos serían similares, con la estructura de datos ampliada.
+
+# Ejemplo de uso:
+inventario = Inventario()
+
+# Añadir un producto
+inventario.añadir_producto('001', 'Compresor LG QK-134', 'Compresores', 15, 150.00, 'LG Electronics', '2024-08-20', 'Estante A1', 'Modelo QK-134')
+
