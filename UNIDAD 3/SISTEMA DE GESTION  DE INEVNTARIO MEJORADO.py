@@ -24,16 +24,27 @@
 
 import os
 from openpyxl import Workbook, load_workbook
+
 class Inventario:
-    def __init__(self, archivo='inventario.txt'):
+    def __init__(self, archivo='inventario.xlsx'):
         self.archivo = archivo
         self.productos = {}
         self.cargar_inventario()
 
     def cargar_inventario(self):
-        """Carga los productos del archivo al iniciar el programa."""
+        """Carga los productos desde un archivo al iniciar el programa."""
         if not os.path.exists(self.archivo):
             self.crear_archivo()
+
+        if self.archivo.endswith('.txt'):
+            self.cargar_desde_txt()
+        elif self.archivo.endswith('.xlsx'):
+            self.cargar_desde_excel()
+        else:
+            print("Formato de archivo no soportado.")
+
+    def cargar_desde_txt(self):
+        """Carga los productos desde un archivo de texto."""
         try:
             with open(self.archivo, 'r') as file:
                 for linea in file:
@@ -44,29 +55,89 @@ class Inventario:
                         'precio': float(precio)
                     }
         except Exception as e:
-            print(f"Error al cargar el inventario: {e}")
+            print(f"Error al cargar el inventario desde texto: {e}")
+
+    def cargar_desde_excel(self):
+        """Carga los productos desde un archivo de Excel usando openpyxl."""
+        try:
+            wb = load_workbook(self.archivo)
+            ws = wb.active
+            for row in ws.iter_rows(min_row=2, values_only=True):
+                id_producto, nombre, cantidad, precio = row
+                self.productos[str(id_producto)] = {
+                    'nombre': nombre,
+                    'cantidad': int(cantidad),
+                    'precio': float(precio)
+                }
+        except Exception as e:
+            print(f"Error al cargar el inventario desde Excel: {e}")
 
     def guardar_inventario(self):
         """Guarda los productos en el archivo."""
+        if self.archivo.endswith('.txt'):
+            self.guardar_en_txt()
+        elif self.archivo.endswith('.xlsx'):
+            self.guardar_en_excel()
+        else:
+            print("Formato de archivo no soportado.")
+
+    def guardar_en_txt(self):
+        """Guarda los productos en un archivo de texto."""
         try:
             with open(self.archivo, 'w') as file:
                 for id_producto, datos in self.productos.items():
                     file.write(f"{id_producto},{datos['nombre']},{datos['cantidad']},{datos['precio']}\n")
-            print("Inventario guardado exitosamente.")
+            print("Inventario guardado exitosamente en texto.")
         except PermissionError:
             print("Error: Permiso denegado para escribir en el archivo.")
         except Exception as e:
-            print(f"Error al guardar el inventario: {e}")
+            print(f"Error al guardar el inventario en texto: {e}")
+
+    def guardar_en_excel(self):
+        """Guarda los productos en un archivo de Excel usando openpyxl."""
+        try:
+            wb = Workbook()
+            ws = wb.active
+            ws.append(['ID', 'Nombre', 'Cantidad', 'Precio'])  # Encabezados
+            for id_producto, datos in self.productos.items():
+                ws.append([id_producto, datos['nombre'], datos['cantidad'], datos['precio']])
+            wb.save(self.archivo)
+            print("Inventario guardado exitosamente en Excel.")
+        except PermissionError:
+            print("Error: Permiso denegado para escribir en el archivo.")
+        except Exception as e:
+            print(f"Error al guardar el inventario en Excel: {e}")
 
     def crear_archivo(self):
         """Crea un archivo vacío si no existe."""
+        if self.archivo.endswith('.txt'):
+            self.crear_archivo_txt()
+        elif self.archivo.endswith('.xlsx'):
+            self.crear_archivo_excel()
+        else:
+            print("Formato de archivo no soportado.")
+
+    def crear_archivo_txt(self):
+        """Crea un archivo de texto vacío si no existe."""
         try:
             with open(self.archivo, 'w') as file:
                 pass
         except PermissionError:
             print("Error: Permiso denegado para crear el archivo.")
         except Exception as e:
-            print(f"Error al crear el archivo: {e}")
+            print(f"Error al crear el archivo de texto: {e}")
+
+    def crear_archivo_excel(self):
+        """Crea un archivo de Excel vacío si no existe."""
+        try:
+            wb = Workbook()
+            ws = wb.active
+            ws.append(['ID', 'Nombre', 'Cantidad', 'Precio'])  # Encabezados
+            wb.save(self.archivo)
+        except PermissionError:
+            print("Error: Permiso denegado para crear el archivo.")
+        except Exception as e:
+            print(f"Error al crear el archivo de Excel: {e}")
 
     def añadir_producto(self, id_producto, nombre, cantidad, precio):
         """Añade un nuevo producto al inventario y guarda los cambios en el archivo."""
@@ -98,14 +169,15 @@ class Inventario:
             print("El producto no existe en el inventario.")
 
 # Ejemplo de uso:
-inventario = Inventario()
+inventario = Inventario(archivo='inventario.xlsx')
 
 # Añadir un producto
-inventario.añadir_producto('001', 'Laptop', 10, 999.99)
+inventario.añadir_producto('1', 'Compresor LG QK-134', 15, 150.00)
 
 # Actualizar un producto
 inventario.actualizar_producto('001', 8, 949.99)
 
 # Eliminar un producto
 inventario.eliminar_producto('001')
+
 
