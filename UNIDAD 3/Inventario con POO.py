@@ -1,17 +1,22 @@
 class Producto:
     def __init__(self, id_producto, nombre, cantidad, precio):
-        self.id_producto = id_producto
-        self.nombre = nombre
-        self.cantidad = cantidad
-        self.precio = precio
+        self.id_producto = id_producto  # Identificador único del producto
+        self.nombre = nombre            # Nombre del producto
+        self.cantidad = cantidad        # Cantidad disponible en inventario
+        self.precio = precio            # Precio del producto
 
-    def obtener_atributos(self):
-        return {
-            "ID": self.id_producto,
-            "Nombre": self.nombre,
-            "Cantidad": self.cantidad,
-            "Precio": self.precio
-        }
+    # Métodos para obtener y establecer los atributos
+    def obtener_id(self):
+        return self.id_producto
+
+    def obtener_nombre(self):
+        return self.nombre
+
+    def obtener_cantidad(self):
+        return self.cantidad
+
+    def obtener_precio(self):
+        return self.precio
 
     def establecer_cantidad(self, cantidad):
         self.cantidad = cantidad
@@ -21,44 +26,48 @@ class Producto:
 
     def __str__(self):
         return f"ID: {self.id_producto}, Nombre: {self.nombre}, Cantidad: {self.cantidad}, Precio: {self.precio}"
-
 import json
 
 class Inventario:
     def __init__(self):
-        self.productos = {}
+        self.productos = {}  # Diccionario para almacenar productos por ID
 
     def añadir_producto(self, producto):
-        if producto.id_producto in self.productos:
-            print(f"El producto con ID {producto.id_producto} ya existe.")
+        if producto.obtener_id() in self.productos:
+            print(f"El producto con ID {producto.obtener_id()} ya existe.")
         else:
-            self.productos[producto.id_producto] = producto
+            self.productos[producto.obtener_id()] = producto
+            print(f"Producto {producto.obtener_nombre()} añadido con éxito.")
 
     def eliminar_producto(self, id_producto):
         if id_producto in self.productos:
             del self.productos[id_producto]
+            print(f"Producto con ID {id_producto} eliminado con éxito.")
         else:
             print(f"El producto con ID {id_producto} no se encontró.")
 
     def actualizar_cantidad(self, id_producto, cantidad):
         if id_producto in self.productos:
             self.productos[id_producto].establecer_cantidad(cantidad)
+            print(f"Cantidad actualizada para el producto ID {id_producto}.")
         else:
             print(f"El producto con ID {id_producto} no se encontró.")
 
     def actualizar_precio(self, id_producto, precio):
         if id_producto in self.productos:
             self.productos[id_producto].establecer_precio(precio)
+            print(f"Precio actualizado para el producto ID {id_producto}.")
         else:
             print(f"El producto con ID {id_producto} no se encontró.")
 
     def buscar_producto(self, nombre):
-        for producto in self.productos.values():
-            if producto.nombre == nombre:
+        productos_encontrados = [prod for prod in self.productos.values() if prod.obtener_nombre() == nombre]
+        if productos_encontrados:
+            for producto in productos_encontrados:
                 print(producto)
-                return producto
-        print(f"No se encontró ningún producto con el nombre {nombre}.")
-        return None
+        else:
+            print(f"No se encontró ningún producto con el nombre {nombre}.")
+        return productos_encontrados
 
     def mostrar_todos(self):
         if not self.productos:
@@ -69,16 +78,21 @@ class Inventario:
 
     def guardar_en_archivo(self, archivo):
         with open(archivo, 'w') as f:
-            json.dump({id_producto: prod.obtener_atributos() for id_producto, prod in self.productos.items()}, f)
+            json.dump({id_producto: prod.__dict__ for id_producto, prod in self.productos.items()}, f)
+            print(f"Inventario guardado en {archivo}.")
 
     def cargar_desde_archivo(self, archivo):
         try:
             with open(archivo, 'r') as f:
                 data = json.load(f)
                 for id_producto, atributos in data.items():
-                    self.añadir_producto(Producto(id_producto, atributos['Nombre'], atributos['Cantidad'], atributos['Precio']))
+                    producto = Producto(id_producto, atributos['nombre'], atributos['cantidad'], atributos['precio'])
+                    self.añadir_producto(producto)
+            print(f"Inventario cargado desde {archivo}.")
         except FileNotFoundError:
-            print("El archivo no se encontró.")
+            print(f"El archivo {archivo} no se encontró.")
+        except json.JSONDecodeError:
+            print(f"Error al decodificar el archivo {archivo}.")
 
 
 def menu():
