@@ -66,6 +66,25 @@ class Inventario:
             for producto in productos_encontrados:
                 print(producto)
         else:
+    def guardar_en_archivo(self, archivo):
+        with open(archivo, 'w') as f:
+            json.dump({id_producto: prod.__dict__ for id_producto, prod in self.productos.items()}, f)
+            print(f"Inventario guardado en {archivo}.")
+
+    def cargar_desde_archivo(self, archivo\):
+        try:
+            with open(archivo, 'r') as f:
+                data = json.load(f)
+                for id_producto, atributos in data.items():
+                    producto = Producto(id_producto, atributos['nombre'], atributos['cantidad'], atributos['precio'])
+                    self.añadir_producto(producto)
+            print(f"Inventario cargado desde {"inventario.json"}.")
+        except FileNotFoundError:
+            print(f"El archivo {"inventario.json"} no se encontró.")
+        except json.JSONDecodeError:
+            print(f"Error al decodificar el archivo {"inventario.json"}.")
+
+
             print(f"No se encontró ningún producto con el nombre {nombre}.")
         return productos_encontrados
 
@@ -75,25 +94,6 @@ class Inventario:
         else:
             for producto in self.productos.values():
                 print(producto)
-
-    def guardar_en_archivo(self, archivo):
-        with open(archivo, 'w') as f:
-            json.dump({id_producto: prod.__dict__ for id_producto, prod in self.productos.items()}, f)
-            print(f"Inventario guardado en {archivo}.")
-
-    def cargar_desde_archivo(self, archivo):
-        try:
-            with open(archivo, 'r') as f:
-                data = json.load(f)
-                for id_producto, atributos in data.items():
-                    producto = Producto(id_producto, atributos['nombre'], atributos['cantidad'], atributos['precio'])
-                    self.añadir_producto(producto)
-            print(f"Inventario cargado desde {archivo}.")
-        except FileNotFoundError:
-            print(f"El archivo {archivo} no se encontró.")
-        except json.JSONDecodeError:
-            print(f"Error al decodificar el archivo {archivo}.")
-
 
 def menu():
     inventario = Inventario()
