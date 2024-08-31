@@ -1,3 +1,4 @@
+#REALIZAMOS CON UN INVENTARIO CON LOS COMPLEMENTOS DE LA POO
 import json
 
 class Producto:
