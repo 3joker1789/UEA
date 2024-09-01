@@ -1,6 +1,7 @@
 #Clase Producto: Debe contener atributos como ID (único), nombre, cantidad y precio. Implementa métodos para obtener y establecer estos atributos.
 
 #Clase Inventario: Debe utilizar una colección adecuada (p. ej., un diccionario) para almacenar los productos. Implementa métodos para:
+
 print('IMPORTADORA ASTUDILLO S.A.')
 AÑO= int(input("AÑO: "))
 
