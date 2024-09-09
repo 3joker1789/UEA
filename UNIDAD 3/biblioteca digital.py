@@ -127,20 +127,24 @@ if __name__ == "__main__":
     # Añadir libros
     libro1 = Libro("El Quijote", "Miguel de Cervantes", "Novela", "1234")
     libro2 = Libro("Cien Años de Soledad", "Gabriel García Márquez", "Realismo Mágico", "5678")
+    libro3 = Libro("El Viejo y el Mar", "Ernest Hemingway", "Narrativo", "1789")
     biblioteca.anadir_libro(libro1)
     biblioteca.anadir_libro(libro2)
-
+    biblioteca.anadir_libro(libro3)
     # Registrar usuarios
     usuario1 = Usuario("Juan", "u001")
     usuario2 = Usuario("Ana", "u002")
+    usuario3 = Usuario("Ramiro", "u003")
+
+
     biblioteca.registrar_usuario(usuario1)
     biblioteca.registrar_usuario(usuario2)
-
+    biblioteca.registrar_usuario(usuario3)
     # Prestar un libro
     biblioteca.prestar_libro("u001", "1234")
 
     # Listar libros prestados
-    biblioteca.listar_libros_prestados("u001")
+    biblioteca.listar_libros_prestados("u003")
 
     # Devolver un libro
     biblioteca.devolver_libro("u001", "1234")
