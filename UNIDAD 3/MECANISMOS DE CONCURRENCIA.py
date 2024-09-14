@@ -1,7 +1,7 @@
 
 import threading
 # Definimos una variable global compartida
-contador_global = 5
+contador_global = 113
 # Creamos un objeto mutex
 mutex = threading.Lock()
 # Función que incrementa el contador global de forma segura utilizando un mutex
@@ -42,12 +42,15 @@ def tarea():
 # Creamos dos hilos que ejecutarán la misma tarea
 hilo1 = threading.Thread(target=tarea)
 hilo2 = threading.Thread(target=tarea)
+hilo3 = threading.Thread(target=tarea)
 # Iniciamos los hilos
 hilo1.start()
 hilo2.start()
+hilo3.start()
 # Esperamos a que ambos hilos terminen
 hilo1.join()
 hilo2.join()
+hilo3.join()
 print("Programa terminado")
 import threading
 import time
