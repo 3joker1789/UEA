@@ -16,25 +16,29 @@ def limpiar_lista():
 
 # Crear la ventana principal
 ventana = tk.Tk()
-ventana.title("Aplicación GUI Básica")
+ventana.title("Aplicación GUI con Colores")
+ventana.geometry("400x300")
+
+# Colores personalizados
+ventana.config(bg="#f0f0f0")  # Fondo de la ventana
 
 # Crear etiquetas y campos de texto
-label = tk.Label(ventana, text="Ingresa un dato:")
+label = tk.Label(ventana, text="Ingresa un dato:", bg="#f0f0f0", fg="#333333", font=("Arial", 12))
 label.pack(pady=10)
 
-entrada = tk.Entry(ventana, width=40)
+entrada = tk.Entry(ventana, width=40, bg="#ffffff", fg="#333333", font=("Arial", 10))
 entrada.pack(pady=10)
 
 # Crear el botón "Agregar"
-boton_agregar = tk.Button(ventana, text="Agregar", command=agregar_dato)
+boton_agregar = tk.Button(ventana, text="Agregar", command=agregar_dato, bg="#4caf50", fg="#ffffff", font=("Arial", 10, "bold"))
 boton_agregar.pack(pady=10)
 
 # Crear la lista para mostrar los datos
-lista = tk.Listbox(ventana, width=40, height=10)
+lista = tk.Listbox(ventana, width=40, height=10, bg="#ffffff", fg="#333333", font=("Arial", 10))
 lista.pack(pady=10)
 
 # Crear el botón "Limpiar"
-boton_limpiar = tk.Button(ventana, text="Limpiar", command=limpiar_lista)
+boton_limpiar = tk.Button(ventana, text="Limpiar", command=limpiar_lista, bg="#f44336", fg="#ffffff", font=("Arial", 10, "bold"))
 boton_limpiar.pack(pady=10)
 
 # Ejecutar el bucle principal

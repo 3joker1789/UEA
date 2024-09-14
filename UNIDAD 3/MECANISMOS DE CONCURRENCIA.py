@@ -1,7 +1,7 @@
 
 import threading
 # Definimos una variable global compartida
-contador_global = 113
+contador_global = 200
 # Creamos un objeto mutex
 mutex = threading.Lock()
 # Función que incrementa el contador global de forma segura utilizando un mutex
