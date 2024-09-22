@@ -55,4 +55,13 @@ entry_desc.grid(row=2, column=1, padx=5, pady=5)
 frame_buttons = tk.Frame(root)
 frame_buttons.pack(pady=10)
 
-btn_agregar
+btn_agregar = tk.Button(frame_buttons, text="Agregar Evento", command=agregar_evento)
+btn_agregar.grid(row=0, column=0, padx=5)
+
+btn_eliminar = tk.Button(frame_buttons, text="Eliminar Evento Seleccionado", command=eliminar_evento)
+btn_eliminar.grid(row=0, column=1, padx=5)
+
+btn_salir = tk.Button(frame_buttons, text="Salir", command=root.quit)
+btn_salir.grid(row=0, column=2, padx=5)
+
+root.mainloop()
