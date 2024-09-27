@@ -5,25 +5,25 @@ from tkinter import messagebox
 class TaskListApp:
     def __init__(self, root):
         self.root = root
-        self.root.title("Lista de Tareas")
+        self.root.title("Lista de Tareas UNIVERSIDAD ESTATAL AMAZONICA")
         self,root.geometry("500x250")
-        self.root.configure(bg="#000000")
+        self.root.configure(bg="#191970")
 
 
-        # Crear el campo de entrada con color de fondo y borde
+        # DAMOS COLOR
         self.task_entry = tk.Entry(root, width=40, bg="#f0f8ff", bd=2)
-        self.task_entry.grid(row=0, column=0, padx=10, pady=10)
-        self.task_entry.bind("<Return>", self.add_task)  # Añadir tarea al presionar Enter
+        self.task_entry.grid(row=0, column=0, padx=15, pady=15)
+        self.task_entry.bind("<Return>", self.add_task)  # SI PRESION ENTER SE ADICIONA TAREA
 
         # Botones con color de fondo
-        self.add_button = tk.Button(root, text="Añadir Tarea", command=self.add_task, bg="#FF0000", fg="black")
+        self.add_button = tk.Button(root, text="Añadir Tarea", command=self.add_task, bg="#40D0C0", fg="black")
         self.add_button.grid(row=0, column=1, padx=10, pady=10)
 
-        self.complete_button = tk.Button(root, text="Marcar como Completada", command=self.complete_task, bg="#f0e68c",
+        self.complete_button = tk.Button(root, text="Marcar como Completada", command=self.complete_task, bg="#C0C0C0",
                                          fg="black")
         self.complete_button.grid(row=1, column=1, padx=10, pady=10)
 
-        self.delete_button = tk.Button(root, text="Eliminar Tarea", command=self.delete_task, bg="#ff7f7f", fg="black")
+        self.delete_button = tk.Button(root, text="Eliminar Tarea", command=self.delete_task, bg="#40D0C0", fg="black")
         self.delete_button.grid(row=2, column=1, padx=10, pady=10)
 
         # Lista de tareas (Listbox) con fondo y color de texto
