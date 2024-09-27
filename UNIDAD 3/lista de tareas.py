@@ -6,7 +6,9 @@ class TaskListApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Lista de Tareas")
+        self,root.geometry("500x250")
         self.root.configure(bg="#000000")
+
 
         # Crear el campo de entrada con color de fondo y borde
         self.task_entry = tk.Entry(root, width=40, bg="#f0f8ff", bd=2)
@@ -14,7 +16,7 @@ class TaskListApp:
         self.task_entry.bind("<Return>", self.add_task)  # Añadir tarea al presionar Enter
 
         # Botones con color de fondo
-        self.add_button = tk.Button(root, text="Añadir Tarea", command=self.add_task, bg="#", fg="black")
+        self.add_button = tk.Button(root, text="Añadir Tarea", command=self.add_task, bg="#FF0000", fg="black")
         self.add_button.grid(row=0, column=1, padx=10, pady=10)
 
         self.complete_button = tk.Button(root, text="Marcar como Completada", command=self.complete_task, bg="#f0e68c",
