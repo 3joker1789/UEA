@@ -8,7 +8,7 @@ class TaskManagerApp:
         self.root.geometry("400x400")
 
         # Colores para mejorar la interfaz
-        self.bg_color = "#f0f0f0"  # Color de fondo
+        self.bg_color = "#0000ff"  # Color de fondo
         self.completed_color = "#a6ffa1"  # Color para tareas completadas
         self.pending_color = "#ffffff"  # Color para tareas pendientes
 
