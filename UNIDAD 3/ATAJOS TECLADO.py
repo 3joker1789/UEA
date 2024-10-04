@@ -9,7 +9,7 @@ class TaskManagerApp:
 
         # Colores para mejorar la interfaz
         self.bg_color = "#000000"  # Color de fondo
-        self.completed_color = "#00ff00"  # Color para tareas completadas
+        self.completed_color = "#33FF5F"  # Color para tareas completadas
         self.pending_color = "#ffffff"  # Color para tareas pendientes
 
         # Frame principal
@@ -23,13 +23,13 @@ class TaskManagerApp:
         self.entry.bind("<Return>", lambda event: self.add_task())
 
         # Botones
-        self.add_btn = tk.Button(self.frame, text="Añadir Tarea", command=self.add_task, bg="#4caf50", fg="black", font=("Arial", 10))
+        self.add_btn = tk.Button(self.frame, text="Añadir Tarea", command=self.add_task, bg="#424242", fg="red", font=("Arial", 10))
         self.add_btn.grid(row=0, column=1, padx=10)
 
-        self.complete_btn = tk.Button(self.frame, text="Completar Tarea", command=self.complete_task, bg="#2196f3", fg="white", font=("Arial", 10))
+        self.complete_btn = tk.Button(self.frame, text="Completar Tarea", command=self.complete_task, bg="#0D47A1", fg="white", font=("Arial", 10))
         self.complete_btn.grid(row=1, column=1, padx=10)
 
-        self.delete_btn = tk.Button(self.frame, text="Eliminar Tarea", command=self.delete_task, bg="#f44336", fg="white", font=("Arial", 10))
+        self.delete_btn = tk.Button(self.frame, text="Eliminar Tarea", command=self.delete_task, bg="#FF333D", fg="white", font=("Arial", 10))
         self.delete_btn.grid(row=2, column=1, padx=10)
 
         # Lista de tareas

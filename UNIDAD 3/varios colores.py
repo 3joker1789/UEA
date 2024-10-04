@@ -9,7 +9,7 @@ dark_colors = [
     "#263238",  # Gris azulado oscuro
     "#4E342E",  # Marrón chocolate oscuro
     "#3E2723",  # Marrón profundo
-    "#BF360C",  # Rojo oscuro quemado
+    "#0D47A1",  # Rojo oscuro quemado
     "#3E1F47",  # Púrpura berenjena
     "#0D3B66",  # Azul marino profundo
     "#1A237E",  # Azul real oscuro
