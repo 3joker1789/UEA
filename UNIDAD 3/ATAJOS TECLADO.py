@@ -8,8 +8,8 @@ class TaskManagerApp:
         self.root.geometry("400x400")
 
         # Colores para mejorar la interfaz
-        self.bg_color = "#0000ff"  # Color de fondo
-        self.completed_color = "#a6ffa1"  # Color para tareas completadas
+        self.bg_color = "#000000"  # Color de fondo
+        self.completed_color = "#00ff00"  # Color para tareas completadas
         self.pending_color = "#ffffff"  # Color para tareas pendientes
 
         # Frame principal
@@ -23,7 +23,7 @@ class TaskManagerApp:
         self.entry.bind("<Return>", lambda event: self.add_task())
 
         # Botones
-        self.add_btn = tk.Button(self.frame, text="Añadir Tarea", command=self.add_task, bg="#4caf50", fg="white", font=("Arial", 10))
+        self.add_btn = tk.Button(self.frame, text="Añadir Tarea", command=self.add_task, bg="#4caf50", fg="black", font=("Arial", 10))
         self.add_btn.grid(row=0, column=1, padx=10)
 
         self.complete_btn = tk.Button(self.frame, text="Completar Tarea", command=self.complete_task, bg="#2196f3", fg="white", font=("Arial", 10))
