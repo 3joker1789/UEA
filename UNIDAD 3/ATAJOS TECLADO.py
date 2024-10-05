@@ -4,7 +4,7 @@ from tkinter import messagebox
 class TaskManagerApp:
     def __init__(self, root):
         self.root = root
-        self.root.title("Gestión de Tareas")
+        self.root.title("UGestión de Tareas")
         self.root.geometry("400x400")
 
         # Colores para mejorar la interfaz
