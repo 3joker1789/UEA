@@ -1,4 +1,4 @@
-import custom tkinter as ctk
+import custo tkinter as ctk
 from tkinter import messagebox
 
 # Sample data
